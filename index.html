@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Health Metrics Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -27,10 +27,10 @@
                 </div>
             </div>
         </header>
-        
+
         <div class="dashboard">
             <!-- Basic Metrics -->
-            <div class="card">
+            <div class="card" id="card-weight">
                 <div class="card-header">
                     <h2 class="card-title"><i class="fas fa-weight"></i> Weight</h2>
                     <div class="card-actions">
@@ -52,7 +52,7 @@
                 <div class="metric-label">Goal: 68 kg</div>
             </div>
             
-            <div class="card">
+            <div class="card" id="card-heart">
                 <div class="card-header">
                     <h2 class="card-title"><i class="fas fa-heart"></i> Heart Rate</h2>
                     <div class="card-actions">
@@ -84,7 +84,7 @@
                 </div>
             </div>
             
-            <div class="card">
+            <div class="card" id="card-steps">
                 <span class="card-badge badge-warning">Goal: 10,000 steps</span>
                 <div class="card-header">
                     <h2 class="card-title"><i class="fas fa-walking"></i> Steps</h2>
@@ -253,12 +253,45 @@
                 <div class="metric-label">Normal range: 12-20 breaths/min</div>
             </div>
         </div>
-        
+
+        <!-- GitHub Information Section -->
+        <div class="github-info">
+            <h2><i class="fab fa-github"></i> GitHub Repository Information</h2>
+            <p>This Health Metrics Dashboard is ready for GitHub. Here's what you should include:</p>
+            <ul>
+                <li><strong>README.md</strong> - Project description, features, setup instructions</li>
+                <li><strong>LICENSE</strong> - MIT License (included below)</li>
+                <li><strong>.gitignore</strong> - For web projects (node_modules, .DS_Store, etc.)</li>
+                <li><strong>Contributing guidelines</strong> - If it's a group project</li>
+                <li><strong>Live demo link</strong> - If deployed</li>
+            </ul>
+            <div class="license">
+                <h3><i class="fas fa-balance-scale"></i> MIT License</h3>
+                <p>Copyright (c) 2023 Health Metrics Dashboard Team</p>
+                <p>Permission is hereby granted, free of charge, to any person obtaining a copy
+                of this software and associated documentation files (the "Software"), to deal
+                in the Software without restriction, including without limitation the rights
+                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                copies of the Software, and to permit persons to whom the Software is
+                furnished to do so, subject to the following conditions:</p>
+                <p>The above copyright notice and this permission notice shall be included in all
+                copies or substantial portions of the Software.</p>
+                <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                SOFTWARE.</p>
+            </div>
+        </div>
+
         <footer>
             <p>Health Metrics Dashboard &copy; 2023 | Data updates automatically from connected devices</p>
             <p>This information is for general health monitoring only and should not be used for diagnostic purposes.</p>
         </footer>
     </div>
-    <script src="script.js"></script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
