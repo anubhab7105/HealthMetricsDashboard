@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Metrics Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-theme">
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-heartbeat"></i> Health Metrics Dashboard</h1>
+                <div class="date-display"><i class="far fa-calendar-alt"></i> <span id="current-date">Loading date...</span></div>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-profile">
+                    <img src="https://i.pravatar.cc/150?img=12" alt="User Avatar">
+                    <div class="user-info">
+                        <div class="user-name">Anubhab Das</div>
+                        <div class="user-id">ID: HMD-2023-0876</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="dashboard">
+            <!-- Basic Metrics -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-weight"></i> Weight</h2>
+                    <div class="card-actions">
+                        <button title="History"><i class="fas fa-history"></i></button>
+                        <button title="Settings"><i class="fas fa-cog"></i></button>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="weight-value">72.5</span>
+                    <span class="metric-unit">kg</span>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="weight-input" placeholder="Enter weight in kg" step="0.1">
+                    <button id="weight-btn">Update</button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 72%; background: linear-gradient(90deg, var(--primary), var(--accent));"></div>
+                </div>
+                <div class="metric-label">Goal: 68 kg</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-heart"></i> Heart Rate</h2>
+                    <div class="card-actions">
+                        <button title="Show ECG"><i class="fas fa-wave-square"></i></button>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="heart-rate-value">68</span>
+                    <span class="metric-unit">BPM</span>
+                    <span class="trend-indicator trend-down"><i class="fas fa-arrow-down"></i> 5%</span>
+                </div>
+                <div class="device-status">
+                    <span class="status-indicator connected"></span>
+                    <span>Connected to smartwatch</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">72</div>
+                        <div class="stat-label">Resting</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">125</div>
+                        <div class="stat-label">Max Today</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">58</div>
+                        <div class="stat-label">Min Today</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <span class="card-badge badge-warning">Goal: 10,000 steps</span>
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-walking"></i> Steps</h2>
+                    <div class="card-actions">
+                        <button title="Show activity map"><i class="fas fa-map-marked-alt"></i></button>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="steps-value">8432</span>
+                    <span class="metric-unit">steps</span>
+                    <span class="trend-indicator trend-up"><i class="fas fa-arrow-up"></i> 12%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 84%; background: linear-gradient(90deg, var(--primary), var(--accent));"></div>
+                </div>
+                <div class="metric-label">84% of daily goal</div>
+                <div class="device-status">
+                    <span class="status-indicator connected"></span>
+                    <span>Connected to smartwatch</span>
+                </div>
+            </div>
+            
+            <!-- Additional Metrics -->
+            <div class="card">
+                <span class="notification-badge">2</span>
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-tachometer-alt"></i> Blood Pressure</h2>
+                    <div class="card-actions">
+                        <button title="Notifications"><i class="fas fa-bell"></i></button>
+                    </div>
+                </div>
+                <div class="blood-pressure">
+                    <div class="bp-value">
+                        <div class="metric-label">Systolic</div>
+                        <div class="metric-value" id="systolic-value">120</div>
+                        <span class="metric-unit">mmHg</span>
+                    </div>
+                    <div class="bp-value">
+                        <div class="metric-label">Diastolic</div>
+                        <div class="metric-value" id="diastolic-value">80</div>
+                        <span class="metric-unit">mmHg</span>
+                    </div>
+                </div>
+                <div class="device-status">
+                    <span class="status-indicator connected"></span>
+                    <span>Connected to monitor - Last reading: 2 hours ago</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-lungs"></i> Blood Oxygen</h2>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="oxygen-value">98</span>
+                    <span class="metric-unit">% SpO₂</span>
+                    <span class="trend-indicator trend-neutral"><i class="fas fa-minus"></i></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 98%; background: linear-gradient(90deg, var(--success), var(--info));"></div>
+                </div>
+                <div class="metric-label">Normal: 95-100%</div>
+                <div class="device-status">
+                    <span class="status-indicator connected"></span>
+                    <span>Connected to oximeter</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <span class="card-badge badge-new">New</span>
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-bed"></i> Sleep Tracking</h2>
+                    <div class="card-actions">
+                        <button title="Sleep analysis"><i class="fas fa-chart-line"></i></button>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="sleep-value">7.5</span>
+                    <span class="metric-unit">hours</span>
+                    <span class="trend-indicator trend-up"><i class="fas fa-arrow-up"></i> 0.5h</span>
+                </div>
+                <div class="sleep-quality">
+                    <div class="quality-item">
+                        <div class="metric-label">Deep Sleep</div>
+                        <div class="quality-value" id="deep-sleep-value">2.1</div>
+                        <span class="metric-unit">hours</span>
+                    </div>
+                    <div class="quality-item">
+                        <div class="metric-label">Light Sleep</div>
+                        <div class="quality-value" id="light-sleep-value">5.4</div>
+                        <span class="metric-unit">hours</span>
+                    </div>
+                </div>
+                <div class="device-status">
+                    <span class="status-indicator connected"></span>
+                    <span>Connected to smartwatch - Last night</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-fire"></i> Calories Burned</h2>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="calories-value">2450</span>
+                    <span class="metric-unit">kcal</span>
+                    <span class="trend-indicator trend-up"><i class="fas fa-arrow-up"></i> 8%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 82%; background: linear-gradient(90deg, var(--warning), var(--danger));"></div>
+                </div>
+                <div class="metric-label">Goal: 3000 kcal</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-thermometer-half"></i> Body Temperature</h2>
+                    <div class="card-actions">
+                        <button title="View history"><i class="fas fa-history"></i></button>
+                    </div>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="temperature-value">36.8</span>
+                    <span class="metric-unit">°C</span>
+                    <span class="trend-indicator trend-neutral"><i class="fas fa-minus"></i></span>
+                </div>
+                <div class="device-status">
+                    <span class="status-indicator connected"></span>
+                    <span>Automatically monitored - Last reading: 30 min ago</span>
+                </div>
+                <div class="metric-label">Normal range: 36.1°C - 37.2°C</div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-tint"></i> Hydration Level</h2>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="hydration-value">1.8</span>
+                    <span class="metric-unit">liters</span>
+                    <span class="trend-indicator trend-up"><i class="fas fa-arrow-up"></i> 0.3L</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%; background: linear-gradient(90deg, var(--info), var(--primary));"></div>
+                </div>
+                <div class="metric-label">Goal: 3.0 liters</div>
+                <div class="input-group">
+                    <input type="number" id="water-input" placeholder="Enter water intake in liters" step="0.1">
+                    <button id="water-btn">Add</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-wind"></i> Respiration Rate</h2>
+                </div>
+                <div class="metric">
+                    <span class="metric-value" id="respiration-value">16</span>
+                    <span class="metric-unit">breaths/min</span>
+                    <span class="trend-indicator trend-down"><i class="fas fa-arrow-down"></i> 2</span>
+                </div>
+                <div class="device-status">
+                    <span class="status-indicator connected"></span>
+                    <span>Connected to smartwatch</span>
+                </div>
+                <div class="metric-label">Normal range: 12-20 breaths/min</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Health Metrics Dashboard &copy; 2023 | Data updates automatically from connected devices</p>
+            <p>This information is for general health monitoring only and should not be used for diagnostic purposes.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
