@@ -64,6 +64,13 @@
                     <span class="metric-unit">BPM</span>
                     <span class="trend-indicator trend-down"><i class="fas fa-arrow-down"></i> 5%</span>
                 </div>
+
+                <!-- Added: Heart rate manual input -->
+                <div class="input-group">
+                    <input type="number" id="heart-input" placeholder="Enter heart rate (BPM)" step="1" min="30" max="220">
+                    <button id="heart-btn">Update</button>
+                </div>
+
                 <div class="device-status">
                     <span class="status-indicator connected"></span>
                     <span>Connected to smartwatch</span>
@@ -108,7 +115,7 @@
             </div>
             
             <!-- Additional Metrics -->
-            <div class="card">
+            <div class="card" id="card-bp">
                 <span class="notification-badge">2</span>
                 <div class="card-header">
                     <h2 class="card-title"><i class="fas fa-tachometer-alt"></i> Blood Pressure</h2>
@@ -128,9 +135,17 @@
                         <span class="metric-unit">mmHg</span>
                     </div>
                 </div>
+
+                <!-- Added: BP inputs (systolic + diastolic) -->
+                <div class="input-group bp-inputs">
+                    <input type="number" id="systolic-input" placeholder="Systolic (mmHg)" step="1" min="50" max="250">
+                    <input type="number" id="diastolic-input" placeholder="Diastolic (mmHg)" step="1" min="30" max="160">
+                    <button id="bp-btn">Update</button>
+                </div>
+
                 <div class="device-status">
                     <span class="status-indicator connected"></span>
-                    <span>Connected to monitor - Last reading: 2 hours ago</span>
+                    <span id="bp-status">Connected to monitor - Last reading: 2 hours ago</span>
                 </div>
             </div>
             
@@ -143,6 +158,13 @@
                     <span class="metric-unit">% SpO₂</span>
                     <span class="trend-indicator trend-neutral"><i class="fas fa-minus"></i></span>
                 </div>
+
+                <!-- Added: Blood Oxygen manual input -->
+                <div class="input-group">
+                    <input type="number" id="oxygen-input" placeholder="Enter SpO₂ (%)" step="1" min="70" max="100">
+                    <button id="oxygen-btn">Update</button>
+                </div>
+
                 <div class="progress-bar">
                     <div class="progress" style="width: 98%; background: linear-gradient(90deg, var(--success), var(--info));"></div>
                 </div>
@@ -211,6 +233,13 @@
                     <span class="metric-unit">°C</span>
                     <span class="trend-indicator trend-neutral"><i class="fas fa-minus"></i></span>
                 </div>
+
+                <!-- Added: Temperature manual input -->
+                <div class="input-group">
+                    <input type="number" id="temp-input" placeholder="Enter temperature (°C)" step="0.1" min="30" max="45">
+                    <button id="temp-btn">Update</button>
+                </div>
+
                 <div class="device-status">
                     <span class="status-indicator connected"></span>
                     <span>Automatically monitored - Last reading: 30 min ago</span>
@@ -246,6 +275,13 @@
                     <span class="metric-unit">breaths/min</span>
                     <span class="trend-indicator trend-down"><i class="fas fa-arrow-down"></i> 2</span>
                 </div>
+
+                <!-- Added: Respiration manual input -->
+                <div class="input-group">
+                    <input type="number" id="resp-input" placeholder="Enter respiration (breaths/min)" step="1" min="5" max="40">
+                    <button id="resp-btn">Update</button>
+                </div>
+
                 <div class="device-status">
                     <span class="status-indicator connected"></span>
                     <span>Connected to smartwatch</span>

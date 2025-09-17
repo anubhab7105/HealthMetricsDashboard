@@ -166,6 +166,104 @@ function setupEventListeners() {
             localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
         });
     }
+
+    // Added: Heart rate update
+    const heartBtn = document.getElementById('heart-btn');
+    if (heartBtn) {
+        heartBtn.addEventListener('click', () => {
+            const heartInput = document.getElementById('heart-input');
+            const heartValEl = document.getElementById('heart-rate-value');
+            if (heartInput && heartValEl && heartInput.value !== '' && !isNaN(heartInput.value)) {
+                const v = parseInt(heartInput.value, 10);
+                if (v >= 30 && v <= 220) {
+                    heartValEl.textContent = v;
+                }
+                heartInput.value = '';
+            }
+        });
+    }
+
+    // Added: Blood pressure update (systolic + diastolic)
+    const bpBtn = document.getElementById('bp-btn');
+    if (bpBtn) {
+        bpBtn.addEventListener('click', () => {
+            const sysIn = document.getElementById('systolic-input');
+            const diaIn = document.getElementById('diastolic-input');
+            const sysEl = document.getElementById('systolic-value');
+            const diaEl = document.getElementById('diastolic-value');
+            const bpStatus = document.getElementById('bp-status');
+            if (sysIn && diaIn && sysEl && diaEl) {
+                const s = sysIn.value;
+                const d = diaIn.value;
+                if (s !== '' && d !== '' && !isNaN(s) && !isNaN(d)) {
+                    const sv = parseInt(s, 10);
+                    const dv = parseInt(d, 10);
+                    // Basic validation ranges
+                    if (sv >= 50 && sv <= 250 && dv >= 30 && dv <= 160) {
+                        sysEl.textContent = sv;
+                        diaEl.textContent = dv;
+                        if (bpStatus) bpStatus.textContent = 'Manual update: just now';
+                    }
+                }
+                sysIn.value = '';
+                diaIn.value = '';
+            }
+        });
+    }
+
+    // Added: Temperature update
+    const tempBtn = document.getElementById('temp-btn');
+    if (tempBtn) {
+        tempBtn.addEventListener('click', () => {
+            const tempInput = document.getElementById('temp-input');
+            const tempEl = document.getElementById('temperature-value');
+            if (tempInput && tempEl && tempInput.value !== '' && !isNaN(tempInput.value)) {
+                const v = parseFloat(tempInput.value);
+                if (v >= 30 && v <= 45) {
+                    tempEl.textContent = v.toFixed(1);
+                }
+                tempInput.value = '';
+            }
+        });
+    }
+
+    // Added: Respiration update
+    const respBtn = document.getElementById('resp-btn');
+    if (respBtn) {
+        respBtn.addEventListener('click', () => {
+            const respInput = document.getElementById('resp-input');
+            const respEl = document.getElementById('respiration-value');
+            if (respInput && respEl && respInput.value !== '' && !isNaN(respInput.value)) {
+                const v = parseInt(respInput.value, 10);
+                if (v >= 5 && v <= 40) {
+                    respEl.textContent = v;
+                }
+                respInput.value = '';
+            }
+        });
+    }
+
+    // Added: Blood Oxygen update
+    const oxygenBtn = document.getElementById('oxygen-btn');
+    if (oxygenBtn) {
+        oxygenBtn.addEventListener('click', () => {
+            const oxyInput = document.getElementById('oxygen-input');
+            const oxyEl = document.getElementById('oxygen-value');
+            if (oxyInput && oxyEl && oxyInput.value !== '' && !isNaN(oxyInput.value)) {
+                const v = parseInt(oxyInput.value, 10);
+                if (v >= 70 && v <= 100) {
+                    oxyEl.textContent = v;
+                    // update progress bar on the same card if present
+                    const oxyCard = oxyEl.closest('.card');
+                    if (oxyCard) {
+                        const prog = oxyCard.querySelector('.progress');
+                        if (prog) prog.style.width = `${Math.min(100, v)}%`;
+                    }
+                }
+                oxyInput.value = '';
+            }
+        });
+    }
 }
 
 // Initialize the dashboard
