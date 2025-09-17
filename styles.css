@@ -733,6 +733,7 @@
         .bp-inputs {
             display: flex;
             gap: 0;
+            margin-top: 24px;
         }
 
         .bp-inputs input {
@@ -764,5 +765,6 @@
 
         /* Ensure small inputs align visually with the existing .input-group rules */
         .input-group.bp-inputs {
+            margin-top: 24px;
             margin-bottom: 18px;
         }
