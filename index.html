@@ -108,6 +108,13 @@
                     <div class="progress" style="width: 84%; background: linear-gradient(90deg, var(--primary), var(--accent));"></div>
                 </div>
                 <div class="metric-label">84% of daily goal</div>
+
+                <!-- ADDED: Steps input (adds to current steps) -->
+                <div class="input-group">
+                    <input type="number" id="steps-input" placeholder="Add steps" step="1" min="0">
+                    <button id="steps-btn">Add</button>
+                </div>
+
                 <div class="device-status">
                     <span class="status-indicator connected"></span>
                     <span>Connected to smartwatch</span>
@@ -200,6 +207,13 @@
                         <span class="metric-unit">hours</span>
                     </div>
                 </div>
+
+                <!-- ADDED: Sleep input (sets total sleep, adjusts deep/light) -->
+                <div class="input-group">
+                    <input type="number" id="sleep-input" placeholder="Enter total sleep hours" step="0.1" min="0" max="24">
+                    <button id="sleep-btn">Update</button>
+                </div>
+
                 <div class="device-status">
                     <span class="status-indicator connected"></span>
                     <span>Connected to smartwatch - Last night</span>
@@ -219,6 +233,12 @@
                     <div class="progress" style="width: 82%; background: linear-gradient(90deg, var(--warning), var(--danger));"></div>
                 </div>
                 <div class="metric-label">Goal: 3000 kcal</div>
+
+                <!-- ADDED: Calories input (adds to current kcal) -->
+                <div class="input-group">
+                    <input type="number" id="calories-input" placeholder="Add calories burned (kcal)" step="1" min="0">
+                    <button id="calories-btn">Add</button>
+                </div>
             </div>
             
             <div class="card">

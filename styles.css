@@ -364,6 +364,7 @@
 
         .input-group {
             display: flex;
+            margin-top: 20px; /* increased gap above input group */
             margin-bottom: 18px;
         }
 

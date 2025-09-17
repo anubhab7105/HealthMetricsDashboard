@@ -149,25 +149,22 @@ function setupEventListeners() {
     const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            document.body.classList.toggle('light-theme');
+            const isDark = document.body.classList.toggle('dark-theme');
+            // ensure light-theme class presence is consistent (optional)
+            if (isDark) document.body.classList.remove('light-theme');
+            else document.body.classList.add('light-theme');
 
             const icon = themeToggle.querySelector('i');
             if (icon) {
-                if (document.body.classList.contains('dark-theme')) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                } else {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                }
+                icon.classList.toggle('fa-moon', !isDark);
+                icon.classList.toggle('fa-sun', isDark);
             }
 
-            localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
     }
 
-    // Added: Heart rate update
+    // Heart rate update
     const heartBtn = document.getElementById('heart-btn');
     if (heartBtn) {
         heartBtn.addEventListener('click', () => {
@@ -183,7 +180,7 @@ function setupEventListeners() {
         });
     }
 
-    // Added: Blood pressure update (systolic + diastolic)
+    // Blood pressure update (systolic + diastolic)
     const bpBtn = document.getElementById('bp-btn');
     if (bpBtn) {
         bpBtn.addEventListener('click', () => {
@@ -211,7 +208,7 @@ function setupEventListeners() {
         });
     }
 
-    // Added: Temperature update
+    // Temperature update
     const tempBtn = document.getElementById('temp-btn');
     if (tempBtn) {
         tempBtn.addEventListener('click', () => {
@@ -227,7 +224,7 @@ function setupEventListeners() {
         });
     }
 
-    // Added: Respiration update
+    // Respiration update
     const respBtn = document.getElementById('resp-btn');
     if (respBtn) {
         respBtn.addEventListener('click', () => {
@@ -243,7 +240,7 @@ function setupEventListeners() {
         });
     }
 
-    // Added: Blood Oxygen update
+    // Blood Oxygen update
     const oxygenBtn = document.getElementById('oxygen-btn');
     if (oxygenBtn) {
         oxygenBtn.addEventListener('click', () => {
@@ -264,6 +261,74 @@ function setupEventListeners() {
             }
         });
     }
+
+    // Steps add
+    const stepsBtn = document.getElementById('steps-btn');
+    if (stepsBtn) {
+        stepsBtn.addEventListener('click', () => {
+            const stepsInput = document.getElementById('steps-input');
+            const stepsEl = document.getElementById('steps-value');
+            if (stepsInput && stepsEl && stepsInput.value !== '' && !isNaN(stepsInput.value)) {
+                const add = Math.max(0, Math.floor(parseInt(stepsInput.value, 10)));
+                const current = parseInt(stepsEl.textContent, 10) || 0;
+                const updated = current + add;
+                stepsEl.textContent = updated;
+                // update progress bar
+                const stepsCard = stepsEl.closest('.card');
+                if (stepsCard) {
+                    const prog = stepsCard.querySelector('.progress');
+                    if (prog) prog.style.width = `${Math.min(100, (updated / 10000) * 100)}%`;
+                }
+                stepsInput.value = '';
+            }
+        });
+    }
+
+    // Sleep update (sets total sleep and adjusts deep/light roughly)
+    const sleepBtn = document.getElementById('sleep-btn');
+    if (sleepBtn) {
+        sleepBtn.addEventListener('click', () => {
+            const sleepInput = document.getElementById('sleep-input');
+            const sleepEl = document.getElementById('sleep-value');
+            const deepEl = document.getElementById('deep-sleep-value');
+            const lightEl = document.getElementById('light-sleep-value');
+            if (sleepInput && sleepEl && sleepInput.value !== '' && !isNaN(sleepInput.value)) {
+                const v = parseFloat(sleepInput.value);
+                if (v >= 0 && v <= 24) {
+                    // set total
+                    sleepEl.textContent = v.toFixed(1);
+                    // simple distribution: ~25% deep, rest light
+                    const deep = +(v * 0.25).toFixed(1);
+                    const light = +(v - deep).toFixed(1);
+                    if (deepEl) deepEl.textContent = deep.toFixed(1);
+                    if (lightEl) lightEl.textContent = light.toFixed(1);
+                }
+                sleepInput.value = '';
+            }
+        });
+    }
+
+    // Calories add
+    const caloriesBtn = document.getElementById('calories-btn');
+    if (caloriesBtn) {
+        caloriesBtn.addEventListener('click', () => {
+            const calInput = document.getElementById('calories-input');
+            const calEl = document.getElementById('calories-value');
+            if (calInput && calEl && calInput.value !== '' && !isNaN(calInput.value)) {
+                const add = Math.max(0, Math.floor(parseInt(calInput.value, 10)));
+                const current = parseInt(calEl.textContent, 10) || 0;
+                const updated = current + add;
+                calEl.textContent = updated;
+                // update progress bar on calories card (goal 3000)
+                const calCard = calEl.closest('.card');
+                if (calCard) {
+                    const prog = calCard.querySelector('.progress');
+                    if (prog) prog.style.width = `${Math.min(100, (updated / 3000) * 100)}%`;
+                }
+                calInput.value = '';
+            }
+        });
+    }
 }
 
 // Initialize the dashboard
@@ -274,13 +339,27 @@ function initDashboard() {
     setupEventListeners();
 
     const savedTheme = localStorage.getItem('theme');
+    const themeToggle = document.getElementById('theme-toggle');
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-theme');
         document.body.classList.remove('light-theme');
-        const icon = document.querySelector('.theme-toggle i');
-        if (icon) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+    } else {
+        // ensure light-theme class exists
+        document.body.classList.add('light-theme');
+        document.body.classList.remove('dark-theme');
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
         }
     }
 }
